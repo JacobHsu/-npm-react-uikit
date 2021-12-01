@@ -1,0 +1,25 @@
+{
+  "name": "@npm-react/uikit",
+  "version": "1.0.0",
+  "description": "Set of UI components for react projects",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc -d --emitDeclarationOnly --declarationDir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobHsu/npm-react-uikit.git"
+  },
+  "author": "jacobhsu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobHsu/npm-react-uikit/issues"
+  },
+  "homepage": "https://github.com/JacobHsu/npm-react-uikit#readme",
+  "devDependencies": {
+    "@types/styled-components": "^5.1.16",
+    "styled-components": "^5.3.3",
+    "typescript": "^4.5.2"
+  }
+}
