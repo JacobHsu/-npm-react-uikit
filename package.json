@@ -1,10 +1,16 @@
 {
   "name": "npm-react-uikit",
-  "version": "1.0.3",
+  "version": "1.0.9",
   "description": "Set of UI components for react projects",
-  "main": "index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rm -rf ./dist && tsc -d --emitDeclarationOnly --declarationDir dist",
+    "local": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist",
+    "build": "rm -rf ./dist && rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "https://github.com/JacobHsu/npm-react-uikit",
@@ -15,11 +21,19 @@
   },
   "homepage": "https://github.com/JacobHsu/npm-react-uikit#readme",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@rollup/plugin-url": "^6.1.0",
     "@types/styled-components": "^5.1.16",
-    "styled-components": "^5.3.3",
+    "rollup": "^2.61.1",
+    "styled-components": "^5.2.0",
+    "tslib": "^2.3.1",
     "typescript": "^4.5.2"
   },
-  "dependencies": {
-    "@types/styled-system": "^5.1.13"
-  }
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.0"
+  },
+  "dependencies": {}
 }
