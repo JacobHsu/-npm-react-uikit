@@ -16,3 +16,48 @@ Rollup 是一個 JavaScript 的打包工具，目前我們常使用的 Webpack �
 `yarn add tslib -D` (@rollup/plugin-typescript)
 
 rollup.config.js -> dist/index.cjs.js index.esm.js
+
+## lodash
+
+`npm i @types/lodash lodash`  
+
+util\getThemeValue.ts `import get from "lodash/get";`
+
+## react-router-dom
+
+`npm i react-router-dom @types/react-router-dom`  
+
+widgets\Menu\components\Logo.tsx `import { Link } from "react-router-dom";`
+
+### Styled System
+
+Styled system 是比 styled components 更低階的套件，能夠使用在 styled components 或是 emotion 上，並基於自定義的 theme，以及搭配 styled system，讓你能夠輕鬆建立高可擴充性樣式的 component。
+
+components\Box\Box.tsx
+components\Box\types.ts
+
+## theme DefaultTheme
+
+C:\2-ex\study\npm-react-uikit\src\widgets\Menu\Menu.tsx
+
+```js
+// Property 'nav' does not exist on type 'DefaultTheme'
+ background-color: ${({ theme }) => theme.nav.background};
+```
+
+theme\light.ts
+
+```js
+const lightTheme: DefaultTheme = {
+    nav: lightNav,
+```
+
+https://github.com/JacobHsu/npm-react-uikit/wiki/styled.d.ts
+
+src\theme\index.ts
+
+```js
+export interface PancakeTheme {
+    nav: NavTheme;
+}
+```
