@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useMatchBreakpoints } from "../../hooks";
-import Logo from "./components/Logo";
+// import Logo from "./components/Logo";
 import { NavProps } from "./types";
 import { MENU_HEIGHT } from "./config";
 
@@ -29,8 +29,8 @@ const StyledNav = styled.nav<{ showMenu: boolean }>`
 `;
 
 const Menu: React.FC<NavProps> = ({
-  isDark,
-  links,
+  // isDark,
+  // links,
 }) => {
   const { isXl } = useMatchBreakpoints();
   const isMobile = isXl === false;
@@ -41,17 +41,18 @@ const Menu: React.FC<NavProps> = ({
   }, []);
 
   // Find the home link if provided
-  const homeLink = links.find((link) => link.label === "Home");
+  // const homeLink = links.find((link) => link.label === "Home");
 
   return (
     <Wrapper>
       <StyledNav showMenu={showMenu}>
-        <Logo
+        {/* <Logo
           isPushed={isPushed}
           togglePush={() => setIsPushed((prevState: boolean) => !prevState)}
           isDark={isDark}
-          href={homeLink?.href ?? "/"}
-        />
+          // href={homeLink?.href ?? "/"}
+          href={"/"}
+        /> */}
       </StyledNav>
     </Wrapper>
   );

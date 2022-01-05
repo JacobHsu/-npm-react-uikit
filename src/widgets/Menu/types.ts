@@ -39,18 +39,18 @@ export interface MenuEntry {
 }
 
 export interface PanelProps {
-  isDark: boolean;
-  toggleTheme: (isDark: boolean) => void;
-  cakePriceUsd?: number;
-  currentLang: string;
-  langs: LangType[];
-  setLang: (lang: LangType) => void;
-  links: Array<MenuEntry>;
+  // isDark: boolean;
+  // toggleTheme: (isDark: boolean) => void;
+  // cakePriceUsd?: number;
+  // currentLang: string;
+  // langs: LangType[];
+  // setLang: (lang: LangType) => void;
+  // links: Array<MenuEntry>;
 }
 
 export interface NavProps extends PanelProps {
   account?: string;
-  login: Login;
+  // login: Login;
   profile?: Profile;
-  logout: () => void;
+  // logout: () => void;
 }
