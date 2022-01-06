@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useMatchBreakpoints } from "../../hooks";
-// import Logo from "./components/Logo";
+import Logo from "./components/Logo";
 import { NavProps } from "./types";
 import { MENU_HEIGHT } from "./config";
 
@@ -46,13 +46,13 @@ const Menu: React.FC<NavProps> = ({
   return (
     <Wrapper>
       <StyledNav showMenu={showMenu}>
-        {/* <Logo
+        <Logo
           isPushed={isPushed}
           togglePush={() => setIsPushed((prevState: boolean) => !prevState)}
-          isDark={isDark}
+          // isDark={isDark}
           // href={homeLink?.href ?? "/"}
           href={"/"}
-        /> */}
+        />
       </StyledNav>
     </Wrapper>
   );
