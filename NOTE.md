@@ -32,7 +32,10 @@ util\getThemeValue.ts `import get from "lodash/get";`
 
 ## react-router-dom
 
-`npm i react-router-dom @types/react-router-dom`  
+`npm uninstall react-router-dom @types/react-router-dom`  
+`npm i react-router-dom@5.3.0 @types/react-router-dom -D`  
+
+ "react-router-dom": "^6.2.1",
 
 widgets\Menu\components\Logo.tsx `import { Link } from "react-router-dom";`
 

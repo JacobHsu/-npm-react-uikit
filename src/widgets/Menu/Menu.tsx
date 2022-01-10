@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useMatchBreakpoints } from "../../hooks";
 import Logo from "./components/Logo";
+import Panel from "./components/Panel";
 import { NavProps } from "./types";
-import { MENU_HEIGHT } from "./config";
+import { MENU_HEIGHT, SIDEBAR_WIDTH_REDUCED, SIDEBAR_WIDTH_FULL } from "./config";
 
 const Wrapper = styled.div`
   position: relative;
@@ -28,9 +29,29 @@ const StyledNav = styled.nav<{ showMenu: boolean }>`
   transform: translate3d(0, 0, 0);
 `;
 
+const BodyWrapper = styled.div`
+  position: relative;
+  display: flex;
+`;
+
+const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
+  flex-grow: 1;
+  margin-top: ${({ showMenu }) => (showMenu ? `${MENU_HEIGHT}px` : 0)};
+  transition: margin-top 0.2s;
+  transform: translate3d(0, 0, 0);
+  max-width: 100%;
+
+  ${({ theme }) => theme.mediaQueries.nav} {
+    margin-left: ${({ isPushed }) => `${isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED}px`};
+    max-width: ${({ isPushed }) => `calc(100% - ${isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED}px)`};
+  }
+`;
+
+
 const Menu: React.FC<NavProps> = ({
   // isDark,
   links,
+  children,
 }) => {
   const { isXl } = useMatchBreakpoints();
   const isMobile = isXl === false;
@@ -53,6 +74,24 @@ const Menu: React.FC<NavProps> = ({
           href={homeLink?.href ?? "/"}
         />
       </StyledNav>
+      <BodyWrapper>
+        <Panel
+          isPushed={isPushed}
+          isMobile={isMobile}
+          showMenu={showMenu}
+          // isDark={isDark}
+          // toggleTheme={toggleTheme}
+          // langs={langs}
+          // setLang={setLang}
+          // currentLang={currentLang}
+          // cakePriceUsd={cakePriceUsd}
+          pushNav={setIsPushed}
+          links={links}
+        />
+        <Inner isPushed={isPushed} showMenu={showMenu}>
+          {children}
+        </Inner>
+      </BodyWrapper>
     </Wrapper>
   );
 };
