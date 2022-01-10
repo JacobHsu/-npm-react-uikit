@@ -4,6 +4,11 @@
 
 比對 dist\index.cjs.js
 
+## local deploy
+
+`npm run local`  
+`xcopy dist C:\2-ex\study\react-pancakeswap-study\node_modules\npm-react-uikit\dist`  
+
 ## Rollup
 
 Rollup 是一個 JavaScript 的打包工具，目前我們常使用的 Webpack 也常拿來跟他做比較，基本上兩者皆能達到我們想要的效果，但其各自有較擅長的領域，Webpack 適合應用程式的打包，而 Rollup 則比較適合 library 的打包
