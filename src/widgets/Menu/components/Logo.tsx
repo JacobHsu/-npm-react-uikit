@@ -10,7 +10,7 @@ interface Props {
   isPushed: boolean;
   // isDark: boolean;
   togglePush: () => void;
-  // href: string;
+  href: string;
 }
 
 const StyledLink = styled(Link)`
@@ -30,8 +30,8 @@ const StyledLink = styled(Link)`
     }
   }
 `;
-// , href , isDark
-const Logo: React.FC<Props> = ({ isPushed, togglePush }) => {
+//  , isDark
+const Logo: React.FC<Props> = ({ isPushed, togglePush, href }) => {
   // const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
@@ -49,7 +49,9 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush }) => {
           <HamburgerIcon width="24px" color="textSubtle" />
         )}
       </MenuButton>
-      {innerLogo}
+        <StyledLink as="a" href={href} aria-label="Pancake home page">
+          {innerLogo}
+        </StyledLink>
       {/* {isAbsoluteUrl ? (
         <StyledLink as="a" href={href} aria-label="Pancake home page">
           {innerLogo}
