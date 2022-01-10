@@ -51,8 +51,9 @@ const Menu: React.FC<NavProps> = ({
           togglePush={() => setIsPushed((prevState: boolean) => !prevState)}
           // isDark={isDark}
           // href={homeLink?.href ?? "/"}
-          href={"/"}
+          // href={"https://www.google.com"}
         />
+        how
       </StyledNav>
     </Wrapper>
   );
