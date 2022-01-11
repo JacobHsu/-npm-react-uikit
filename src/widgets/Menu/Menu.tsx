@@ -49,7 +49,7 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
 
 
 const Menu: React.FC<NavProps> = ({
-  // isDark,
+  isDark,
   links,
   children,
 }) => {
@@ -70,7 +70,7 @@ const Menu: React.FC<NavProps> = ({
         <Logo
           isPushed={isPushed}
           togglePush={() => setIsPushed((prevState: boolean) => !prevState)}
-          // isDark={isDark}
+          isDark={isDark}
           href={homeLink?.href ?? "/"}
         />
       </StyledNav>
@@ -79,7 +79,7 @@ const Menu: React.FC<NavProps> = ({
           isPushed={isPushed}
           isMobile={isMobile}
           showMenu={showMenu}
-          // isDark={isDark}
+          isDark={isDark}
           // toggleTheme={toggleTheme}
           // langs={langs}
           // setLang={setLang}

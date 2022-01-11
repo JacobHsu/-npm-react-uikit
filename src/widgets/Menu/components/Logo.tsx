@@ -8,7 +8,7 @@ import MenuButton from "./MenuButton";
 
 interface Props {
   isPushed: boolean;
-  // isDark: boolean;
+  isDark: boolean;
   togglePush: () => void;
   href: string;
 }
@@ -30,13 +30,13 @@ const StyledLink = styled(Link)`
     }
   }
 `;
-//  , isDark
-const Logo: React.FC<Props> = ({ isPushed, togglePush, href }) => {
+
+const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
   // const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
       <LogoIcon className="mobile-icon" />
-      {/* <LogoWithText className="desktop-icon" isDark={isDark} /> */}
+      <LogoWithText className="desktop-icon" isDark={isDark} />
     </>
   );
 

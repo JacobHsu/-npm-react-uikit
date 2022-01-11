@@ -39,7 +39,7 @@ export interface MenuEntry {
 }
 
 export interface PanelProps {
-  // isDark: boolean;
+  isDark: boolean;
   // toggleTheme: (isDark: boolean) => void;
   // cakePriceUsd?: number;
   // currentLang: string;
