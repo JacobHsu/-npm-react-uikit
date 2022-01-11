@@ -32,7 +32,7 @@ const StyledLink = styled(Link)`
 `;
 
 const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
-  // const isAbsoluteUrl = href.startsWith("http");
+  const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
       <LogoIcon className="mobile-icon" />
@@ -49,10 +49,7 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
           <HamburgerIcon width="24px" color="textSubtle" />
         )}
       </MenuButton>
-        <StyledLink as="a" href={href} aria-label="Pancake home page">
-          {innerLogo}
-        </StyledLink>
-      {/* {isAbsoluteUrl ? (
+      {isAbsoluteUrl ? (
         <StyledLink as="a" href={href} aria-label="Pancake home page">
           {innerLogo}
         </StyledLink>
@@ -60,10 +57,9 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
         <StyledLink to={href} aria-label="Pancake home page">
           {innerLogo}
         </StyledLink>
-      )} */}
+      )}
     </Flex>
   );
 };
 
-export default React.memo(Logo, (prev, next) => prev.isPushed === next.isPushed );
-// && prev.isDark === next.isDark
+export default React.memo(Logo, (prev, next) => prev.isPushed === next.isPushed && prev.isDark === next.isDark);

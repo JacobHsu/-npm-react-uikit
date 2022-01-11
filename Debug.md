@@ -11,3 +11,11 @@
  pancake-uikit react-router-dom v5  
  pancake-frontend react-router-dom v5 
  
+ > Each child in a list should have a unique "key" prop.
+
+Menu\components\PanelBody.tsx
+`<MenuEntry key={entry.label}`
+
+> Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.
+
+ return <Tag {...props} {...otherProps} />

@@ -5,7 +5,7 @@ import { SvgProps } from "../../../components/Svg";
 import * as IconModule from "../icons";
 // import Accordion from "./Accordion";
 import { MenuEntry, LinkLabel } from "./MenuEntry";
-// import MenuLink from "./MenuLink";
+import MenuLink from "./MenuLink";
 import { PanelProps, PushedProps } from "../types";
 
 interface Props extends PanelProps, PushedProps {
@@ -59,9 +59,10 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links }) => {
         //     </Accordion>
         //   );
         // }
+
         return (
           <MenuEntry key={entry.label} isActive={entry.href === location.pathname} className={calloutClass}>
-            <LinkLabel isPushed={isPushed}>{entry.label}</LinkLabel>
+            <MenuLink href={entry.href}>{entry.label}</MenuLink>
             {/* <MenuLink href={entry.href} onClick={handleClick}>
               {iconElement}
               <LinkLabel isPushed={isPushed}>{entry.label}</LinkLabel>
