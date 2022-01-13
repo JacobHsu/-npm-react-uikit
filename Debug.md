@@ -18,4 +18,12 @@ Menu\components\PanelBody.tsx
 
 > Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.
 
- return <Tag {...props} {...otherProps} />
+widgets\Menu\components\PanelBody.tsx
+
+```js
+{links.map((entry) => {
+    const Icon =  Icons[entry.icon]; // ex: FarmIcon but not found
+    const iconElement = <Icon width="24px" mr="8px" />;
+
+ {iconElement}
+```

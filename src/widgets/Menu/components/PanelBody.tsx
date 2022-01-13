@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { SvgProps } from "../../../components/Svg";
 import * as IconModule from "../icons";
+
 // import Accordion from "./Accordion";
 import { MenuEntry, LinkLabel } from "./MenuEntry";
 import MenuLink from "./MenuLink";
@@ -31,10 +32,10 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links }) => {
   return (
     <Container>
       {links.map((entry) => {
-        const Icon = Icons[entry.icon];
+        const Icon = Icons['FarmIcon']; // Icons[entry.icon]; // 
         const iconElement = <Icon width="24px" mr="8px" />;
         const calloutClass = entry.calloutClass ? entry.calloutClass : undefined;
-
+console.log('iconElement:', Icons, entry.icon, Icon)
         // if (entry.items) {
         //   const itemsMatchIndex = entry.items.findIndex((item) => item.href === location.pathname);
         //   const initialOpenState = entry.initialOpenState === true ? entry.initialOpenState : itemsMatchIndex >= 0;
@@ -62,11 +63,10 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links }) => {
 
         return (
           <MenuEntry key={entry.label} isActive={entry.href === location.pathname} className={calloutClass}>
-            <MenuLink href={entry.href}>{entry.label}</MenuLink>
-            {/* <MenuLink href={entry.href} onClick={handleClick}>
+            <MenuLink href={entry.href} onClick={handleClick}>
               {iconElement}
               <LinkLabel isPushed={isPushed}>{entry.label}</LinkLabel>
-            </MenuLink> */}
+            </MenuLink>
           </MenuEntry>
         );
       })}
