@@ -50,6 +50,9 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
 
 const Menu: React.FC<NavProps> = ({
   isDark,
+  langs,
+  setLang,
+  currentLang,
   links,
   children,
 }) => {
@@ -81,9 +84,9 @@ const Menu: React.FC<NavProps> = ({
           showMenu={showMenu}
           isDark={isDark}
           // toggleTheme={toggleTheme}
-          // langs={langs}
-          // setLang={setLang}
-          // currentLang={currentLang}
+          langs={langs}
+          setLang={setLang}
+          currentLang={currentLang}
           // cakePriceUsd={cakePriceUsd}
           pushNav={setIsPushed}
           links={links}
