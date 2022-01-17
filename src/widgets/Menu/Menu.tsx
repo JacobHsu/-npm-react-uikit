@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import throttle from "lodash/throttle";
+import Flex from "../../components/Box/Flex";
 import { useMatchBreakpoints } from "../../hooks";
 import Logo from "./components/Logo";
 import Panel from "./components/Panel";
+import UserBlock from "./components/UserBlock";
 import { NavProps } from "./types";
+import Avatar from "./components/Avatar";
 import { MENU_HEIGHT, SIDEBAR_WIDTH_REDUCED, SIDEBAR_WIDTH_FULL } from "./config";
 
 const Wrapper = styled.div`
@@ -49,19 +53,52 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
 
 
 const Menu: React.FC<NavProps> = ({
+  account,
+  login,
+  logout,
   isDark,
+  toggleTheme,
   langs,
   setLang,
   currentLang,
+  cakePriceUsd,
   links,
+  profile,
   children,
 }) => {
   const { isXl } = useMatchBreakpoints();
   const isMobile = isXl === false;
   const [isPushed, setIsPushed] = useState(!isMobile);
   const [showMenu, setShowMenu] = useState(true);
+  const refPrevOffset = useRef(window.pageYOffset);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const currentOffset = window.pageYOffset;
+      const isBottomOfPage = window.document.body.clientHeight === currentOffset + window.innerHeight;
+      const isTopOfPage = currentOffset === 0;
+      // Always show the menu when user reach the top
+      if (isTopOfPage) {
+        setShowMenu(true);
+      }
+      // Avoid triggering anything at the bottom because of layout shift
+      else if (!isBottomOfPage) {
+        if (currentOffset < refPrevOffset.current) {
+          // Has scroll up
+          setShowMenu(true);
+        } else {
+          // Has scroll down
+          setShowMenu(false);
+        }
+      }
+      refPrevOffset.current = currentOffset;
+    };
+    const throttledHandleScroll = throttle(handleScroll, 200);
+
+    window.addEventListener("scroll", throttledHandleScroll);
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll);
+    };
   }, []);
 
   // Find the home link if provided
@@ -76,6 +113,10 @@ const Menu: React.FC<NavProps> = ({
           isDark={isDark}
           href={homeLink?.href ?? "/"}
         />
+        <Flex>
+          <UserBlock account={account} login={login} logout={logout} />
+          {profile && <Avatar profile={profile} />}
+        </Flex>
       </StyledNav>
       <BodyWrapper>
         <Panel
@@ -83,11 +124,11 @@ const Menu: React.FC<NavProps> = ({
           isMobile={isMobile}
           showMenu={showMenu}
           isDark={isDark}
-          // toggleTheme={toggleTheme}
+          toggleTheme={toggleTheme}
           langs={langs}
           setLang={setLang}
           currentLang={currentLang}
-          // cakePriceUsd={cakePriceUsd}
+          cakePriceUsd={cakePriceUsd}
           pushNav={setIsPushed}
           links={links}
         />

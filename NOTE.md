@@ -8,6 +8,7 @@
 
 `npm run local`  
 `xcopy dist C:\2-ex\study\react-pancakeswap-study\node_modules\npm-react-uikit\dist`  
+`xcopy dist C:\2-ex\study\pancake-frontend\node_modules\npm-react-uikit\dist`  
 
 npm更新 專案重啟 `yarn start`
 

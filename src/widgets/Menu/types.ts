@@ -1,4 +1,4 @@
-// import { Login } from "../WalletModal/types";
+import { Login } from "../WalletModal/types";
 
 export interface LangType {
   code: string;
@@ -40,8 +40,8 @@ export interface MenuEntry {
 
 export interface PanelProps {
   isDark: boolean;
-  // toggleTheme: (isDark: boolean) => void;
-  // cakePriceUsd?: number;
+  toggleTheme: (isDark: boolean) => void;
+  cakePriceUsd?: number;
   currentLang: string;
   langs: LangType[];
   setLang: (lang: LangType) => void;
@@ -50,7 +50,7 @@ export interface PanelProps {
 
 export interface NavProps extends PanelProps {
   account?: string;
-  // login: Login;
+  login: Login;
   profile?: Profile;
-  // logout: () => void;
+  logout: () => void;
 }
