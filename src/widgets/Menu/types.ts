@@ -1,3 +1,4 @@
+import { ElementType, ReactElement } from "react";
 import { Login } from "../WalletModal/types";
 
 export interface LangType {
@@ -16,11 +17,6 @@ export interface Profile {
 export interface PushedProps {
   isPushed: boolean;
   pushNav: (isPushed: boolean) => void;
-}
-
-export interface NavTheme {
-  background: string;
-  hover: string;
 }
 
 export interface MenuSubEntry {
@@ -49,6 +45,8 @@ export interface PanelProps {
 }
 
 export interface NavProps extends PanelProps {
+  linkComponent?: ElementType;
+  banner?: ReactElement;
   account?: string;
   login: Login;
   profile?: Profile;

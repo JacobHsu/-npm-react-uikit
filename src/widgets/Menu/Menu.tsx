@@ -4,33 +4,39 @@ import throttle from "lodash/throttle";
 import Flex from "../../components/Box/Flex";
 import { useMatchBreakpoints } from "../../hooks";
 import Logo from "./components/Logo";
-import Panel from "./components/Panel";
 import UserBlock from "./components/UserBlock";
 import { NavProps } from "./types";
 import Avatar from "./components/Avatar";
-import { MENU_HEIGHT, SIDEBAR_WIDTH_REDUCED, SIDEBAR_WIDTH_FULL } from "./config";
+import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
+import { MenuContext } from "./context";
 
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
 `;
 
-const StyledNav = styled.nav<{ showMenu: boolean }>`
-  position: fixed;
-  top: ${({ showMenu }) => (showMenu ? 0 : `-${MENU_HEIGHT}px`)};
-  left: 0;
-  transition: top 0.2s;
+const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 8px;
-  padding-right: 16px;
   width: 100%;
   height: ${MENU_HEIGHT}px;
   background-color: ${({ theme }) => theme.nav.background};
-  border-bottom: solid 2px rgba(133, 133, 133, 0.1);
-  z-index: 20;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   transform: translate3d(0, 0, 0);
+
+  padding-left: 16px;
+  padding-right: 16px;
+`;
+
+const FixedContainer = styled.div<{ showMenu: boolean; height: number }>`
+  position: fixed;
+  top: ${({ showMenu, height }) => (showMenu ? 0 : `-${height}px`)};
+  left: 0;
+  transition: top 0.2s;
+  height: ${({ height }) => `${height}px`};
+  width: 100%;
+  z-index: 20;
 `;
 
 const BodyWrapper = styled.div`
@@ -40,19 +46,14 @@ const BodyWrapper = styled.div`
 
 const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
   flex-grow: 1;
-  margin-top: ${({ showMenu }) => (showMenu ? `${MENU_HEIGHT}px` : 0)};
-  transition: margin-top 0.2s;
+  transition: margin-top 0.2s, margin-left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate3d(0, 0, 0);
   max-width: 100%;
-
-  ${({ theme }) => theme.mediaQueries.nav} {
-    margin-left: ${({ isPushed }) => `${isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED}px`};
-    max-width: ${({ isPushed }) => `calc(100% - ${isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED}px)`};
-  }
 `;
 
-
 const Menu: React.FC<NavProps> = ({
+  linkComponent = "a",
+  banner,
   account,
   login,
   logout,
@@ -71,6 +72,10 @@ const Menu: React.FC<NavProps> = ({
   const [isPushed, setIsPushed] = useState(!isMobile);
   const [showMenu, setShowMenu] = useState(true);
   const refPrevOffset = useRef(window.pageYOffset);
+
+  const topBannerHeight = isMobile ? TOP_BANNER_HEIGHT_MOBILE : TOP_BANNER_HEIGHT;
+
+  const totalTopMenuHeight = banner ? MENU_HEIGHT + topBannerHeight : MENU_HEIGHT;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,38 +110,27 @@ const Menu: React.FC<NavProps> = ({
   const homeLink = links.find((link) => link.label === "Home");
 
   return (
-    <Wrapper>
-      <StyledNav showMenu={showMenu}>
-        <Logo
-          isPushed={isPushed}
-          togglePush={() => setIsPushed((prevState: boolean) => !prevState)}
-          isDark={isDark}
-          href={homeLink?.href ?? "/"}
-        />
-        <Flex>
-          <UserBlock account={account} login={login} logout={logout} />
-          {profile && <Avatar profile={profile} />}
-        </Flex>
-      </StyledNav>
-      <BodyWrapper>
-        <Panel
-          isPushed={isPushed}
-          isMobile={isMobile}
-          showMenu={showMenu}
-          isDark={isDark}
-          toggleTheme={toggleTheme}
-          langs={langs}
-          setLang={setLang}
-          currentLang={currentLang}
-          cakePriceUsd={cakePriceUsd}
-          pushNav={setIsPushed}
-          links={links}
-        />
-        <Inner isPushed={isPushed} showMenu={showMenu}>
-          {children}
-        </Inner>
-      </BodyWrapper>
-    </Wrapper>
+    <MenuContext.Provider value={{ linkComponent }}>
+      <Wrapper>
+        <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
+          <StyledNav>
+            <Flex>
+              <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
+              {/* {!isMobile && <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />} */}
+            </Flex>
+            <Flex>
+              <UserBlock account={account} login={login} logout={logout} />
+              {profile && <Avatar profile={profile} />}
+            </Flex>
+          </StyledNav>
+        </FixedContainer>
+        <BodyWrapper>
+          <Inner isPushed={isPushed} showMenu={showMenu}>
+            {children}
+          </Inner>
+        </BodyWrapper>
+      </Wrapper>
+    </MenuContext.Provider>
   );
 };
 

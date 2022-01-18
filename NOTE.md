@@ -6,6 +6,8 @@
 
 ## local deploy
 
+pancake-toolkit/packages/[pancake-uikit](https://github.com/pancakeswap/pancake-toolkit/tree/master/packages/pancake-uikit)
+
 `npm run local`  
 `xcopy dist C:\2-ex\study\react-pancakeswap-study\node_modules\npm-react-uikit\dist`  
 `xcopy dist C:\2-ex\study\pancake-frontend\node_modules\npm-react-uikit\dist`  
