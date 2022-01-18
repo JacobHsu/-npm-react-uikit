@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import throttle from "lodash/throttle";
 import Flex from "../../components/Box/Flex";
+import MenuItems from "../../components/MenuItems/MenuItems";
 import { useMatchBreakpoints } from "../../hooks";
 import Logo from "./components/Logo";
-import UserBlock from "./components/UserBlock";
 import { NavProps } from "./types";
-import Avatar from "./components/Avatar";
 import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
 import { MenuContext } from "./context";
 
@@ -54,21 +53,18 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
 const Menu: React.FC<NavProps> = ({
   linkComponent = "a",
   banner,
-  account,
-  login,
-  logout,
   isDark,
+  globalMenu,
   toggleTheme,
+  activeItem,
+  activeSubItem,
   langs,
   setLang,
   currentLang,
-  cakePriceUsd,
   links,
-  profile,
   children,
 }) => {
-  const { isXl } = useMatchBreakpoints();
-  const isMobile = isXl === false;
+  const { isMobile } = useMatchBreakpoints();
   const [isPushed, setIsPushed] = useState(!isMobile);
   const [showMenu, setShowMenu] = useState(true);
   const refPrevOffset = useRef(window.pageYOffset);
@@ -116,11 +112,10 @@ const Menu: React.FC<NavProps> = ({
           <StyledNav>
             <Flex>
               <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
-              {/* {!isMobile && <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />} */}
+              {!isMobile && <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />}
             </Flex>
-            <Flex>
-              <UserBlock account={account} login={login} logout={logout} />
-              {profile && <Avatar profile={profile} />}
+            <Flex alignItems="center" height="100%">
+              {globalMenu}
             </Flex>
           </StyledNav>
         </FixedContainer>

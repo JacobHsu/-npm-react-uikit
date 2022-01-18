@@ -16,3 +16,5 @@ export interface PancakeTheme {
 export { default as light } from "./light";
 
 export { lightColors } from "./colors";
+
+export * from "./types";

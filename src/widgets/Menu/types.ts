@@ -1,17 +1,9 @@
 import { ElementType, ReactElement } from "react";
-import { Login } from "../WalletModal/types";
+import { MenuItemsType } from "../../components/MenuItems/types";
 
 export interface LangType {
   code: string;
   language: string;
-}
-
-export interface Profile {
-  username?: string;
-  image?: string;
-  profileLink: string;
-  noProfileLink: string;
-  showPip?: boolean;
 }
 
 export interface PushedProps {
@@ -25,15 +17,6 @@ export interface MenuSubEntry {
   calloutClass?: string;
 }
 
-export interface MenuEntry {
-  label: string;
-  icon: string;
-  items?: MenuSubEntry[];
-  href?: string;
-  calloutClass?: string;
-  initialOpenState?: boolean;
-}
-
 export interface PanelProps {
   isDark: boolean;
   toggleTheme: (isDark: boolean) => void;
@@ -41,14 +24,13 @@ export interface PanelProps {
   currentLang: string;
   langs: LangType[];
   setLang: (lang: LangType) => void;
-  links: Array<MenuEntry>;
 }
 
 export interface NavProps extends PanelProps {
   linkComponent?: ElementType;
   banner?: ReactElement;
-  account?: string;
-  login: Login;
-  profile?: Profile;
-  logout: () => void;
+  globalMenu?: ReactElement;
+  links: Array<MenuItemsType>;
+  activeItem: string;
+  activeSubItem: string;
 }
